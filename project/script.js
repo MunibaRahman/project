@@ -20,44 +20,49 @@ let maze = [
   "-x--x---------------",
   "-x--x---------------",
 ];
-let scene, corn, camera, grass, coin,tracRide;
+let scene, corn, camera, tracCam, grass, coin,tracRide,tractorOrig;
 window.onload = function(){
   scene = document.querySelector("a-scene");
-  mainCamera = document.getElementById("mainCamera");
+  camera = document.getElementById("mainCamera");
   tractorCamera = document.getElementById("tractorCamera");
-  tractor = document.getElementById("tractor");
-  
+  tractorOrig = document.getElementById("tractor");
+  tractor1 = new Tractor(10,3,0);
   for(let r = 0; r < maze.length; r++){
     let row = maze[r];
     let cols = row.split("");
     for(let c = 0; c < cols.length; c++){
    if(cols[c] == "x"){
-        new Corn(c-20,r-20);
+     new Corn(c-20,r-20);
       }
     }
-    
+
   }
-  
 new Grass(-10, 0);
 new Coin(-9.5, 1, -9);
 
- tractor.addEventListener("click",()=>{
-		tracRide = true; 
+  window.addEventListener("keypress",function(e){
+if(e.key == " "){
+    camera.setAttribute("active",true);
+	camera.object3D.position.y = tractor1.camera.object3D.position.y;
+    camera.object3D.position.x = tractor1.camera.object3D.position.x;
+    camera.object3D.position.z = tractor1.camera.object3D.position.z;
+    tractor1.camera.setAttribute("active",false);
+	}
 
+    
   })
 
+  loop();
+}
+  
+function loop(){
+ //tractor1.tractorRide();
+  //balloon1.balloonEnd();
+   window.requestAnimationFrame(loop);
+
 }
 
-if (tracRide){
-	tractorCamera.setAttribute("active",true);
-      mainCamera.setAttribute("active",false);
-	 tractorCamera.object3D.position.y = tractor.object3D.position.y;
-		tractorCamera.object3D.position.x = tractor.object3D.position.x;
-		tractorCamera.object3D.position.z = tractor.object3D.position.z;
-}else if (tracRide = false){
-	tractorCamera.setAttribute("active",false);
-       mainCamera.setAttribute("active",true);
-}
+
  
 function distance(obj1,obj2){
   let x1 = obj1.object3D.position.x;

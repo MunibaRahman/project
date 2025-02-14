@@ -1,6 +1,5 @@
 <html>
   <head>
-    <title> Aframe Project </title>
      <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
      <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.1.0/dist/aframe-extras.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
@@ -9,26 +8,31 @@
 <script src="kinema.js"></script>
 <script src = "grass.js"></script>
 <script src = "coin.js"></script>
+<script src = "tractor.js"></script>
   </head>
   <body>
     <a-scene>
 
 
       <a-assets>
+ <audio id="coinSound" src="coin.mp3" preload="auto"></audio>
 <a-asset-item id="farm" src="low_poly_farm/scene.gltf" ></a-asset-item>
 <a-asset-item id="corn" src="corn_corn_corn/scene.gltf" ></a-asset-item>
 <a-asset-item id="grass" src="grass/scene.gltf" ></a-asset-item>
+<a-asset-item id="horse" src="horse/scene.gltf" ></a-asset-item>
       </a-assets>
  
- <a-gltf-model src = "#farm" position = "-200 -27 0"></a-gltf-model>
+ <a-gltf-model src = "#farm" position = "-100 -14 0" scale = " 0.5 0.5 0.5" ></a-gltf-model>
+  <a-gltf-model src = "#horse" position = "17 0 0"></a-gltf-model>
  
- <a-entity id = "tractor" scale = "0.5 0.5 0.5" position = "5 0.5 0">
-   <a-box  position="-9 3 5" opacity = "0" >
+ 
+ <a-entity id = "tractor" scale = "0.5 0.5 0.5" position = "5 -100 0">
+   <!-- <a-box  position="-9 3 5" opacity = "0" >
 <a-camera active="false" id="tractorCamera" wasd-controls-enabled="true">
 <a-cursor>
 </a-cursor>
             </a-camera>
-</a-box>
+</a-box> -->
 <a-box  position="0 2 5"  color="red" width="5.9" depth="3" height="6"></a-box>
 <a-box position="-4 1 5"  color="red" width="5" depth="3" height="3.2">
 
@@ -47,7 +51,7 @@
        <a-sky src = "sky.jpg" ></a-sky>
  
 <a-entity id="cameraRig"  position="0 1.6 0">
-<a-camera id="mainCamera" position = "0 1 -2" kinema-body="radius: 0.8">
+<a-camera id="mainCamera" position = "0 3 -2" kinema-body="radius: 0.8">
 <a-cursor></a-cursor>
 </a-camera>
     </a-entity>
