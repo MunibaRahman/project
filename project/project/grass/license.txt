@@ -1,0 +1,11 @@
+Model Information:
+* title:	Grass Patch
+* source:	https://sketchfab.com/3d-models/grass-patch-c12dc2ba12b04261a8ca771386c4de57
+* author:	danisali9548 (https://sketchfab.com/danisali9548)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Grass Patch" (https://sketchfab.com/3d-models/grass-patch-c12dc2ba12b04261a8ca771386c4de57) by danisali9548 (https://sketchfab.com/danisali9548) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
