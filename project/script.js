@@ -41,7 +41,7 @@ window.onload = function(){
   tractorOrig = document.getElementById("tractor");
   tractor1 = new Tractor(10,3,0);
   fence = document.getElementById("fenceUnit");
-	balloon1 = new Balloon(4.5,0, -5);
+	balloon1 = new Balloon(4.5,0, 30);
  
 	mainCursor = document.getElementById("mainCursor");
 
@@ -61,9 +61,9 @@ window.onload = function(){
     let cols2 = row2.split("");
     for(let z = 0; z < cols2.length; z++){
       if(cols2[z] == "x"){
-        new Fence(x,0.25,z-12,90);
+        new Fence(x,0.25,z-6,90);
       }else if(cols2[z] == "X"){
-        new Fence(x,0.25,z-13,0);
+        new Fence(x,0.25,z-7,0);
       }}}
 
 new Grass(-10, 0);
