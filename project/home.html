@@ -20,7 +20,6 @@
 <a-asset-item id="farm" src="low_poly_farm/scene.gltf" ></a-asset-item>
 <a-asset-item id="corn" src="corn_corn_corn/scene.gltf" ></a-asset-item>
 <a-asset-item id="grass" src="grass/scene.gltf" ></a-asset-item>
-<a-asset-item id="horse" src="horse/scene.gltf" ></a-asset-item>
 <img id="raceimg" src="raceimg.png">
 <img id="checkimg" src="checkimg.png">
 <a-asset-item src = "hotModel/scene.gltf" id = "balloonModel" ></a-asset-item>
@@ -28,16 +27,12 @@
       </a-assets>
  
  <a-gltf-model src = "#farm" position = "-100 -14 0" scale = " 0.5 0.5 0.5" ></a-gltf-model>
-  <!-- <a-gltf-model src = "#horse" position = "17 0 0"></a-gltf-model> -->
+  
  
  
  <a-entity id = "tractor" scale = "0.5 0.5 0.5" position = "5 -100 0">
-   <!-- <a-box  position="-9 3 5" opacity = "0" >
-<a-camera active="false" id="tractorCamera" wasd-controls-enabled="true">
-<a-cursor>
-</a-cursor>
-            </a-camera>
-</a-box> -->
+   
+
 <a-box  position="0 2 5"  color="red" width="5.9" depth="3" height="6"></a-box>
 <a-box position="-4 1 5"  color="red" width="5" depth="3" height="3.2">
 
@@ -56,7 +51,7 @@
        <a-sky src = "sky.jpg" ></a-sky>
  
 <a-entity id="cameraRig"  position="0 1.6 0">
-<a-camera id="mainCamera" position = "0 3 -2" kinema-body="radius: 0.8">
+<a-camera id="mainCamera" position = "0 4 -2" kinema-body="radius: 0.8">
 <a-cursor id = "mainCursor"></a-cursor>
 </a-camera>
     </a-entity>
@@ -68,7 +63,7 @@
     </a-entity>
 
 	<!-- race index view https://sketchfab.com/3d-models/farmer-rat-joe-58b3678900794e2ba16909aa10c317ac https://sketchfab.com/3d-models/farmer-frog-c9852e66b01e4a9982a335fa01b82e53 https://sketchfab.com/3d-models/farmer-e2c0ea020abd4d7f9779de5fe9002ecd  https://sketchfab.com/3d-models/farmer-dog-d7bfa8ca8bdd4df08562099ea605d1f2-->
-	<a-entity position = "0 10 -30" id = "raceView">
+	<a-entity position = "0 0 -30" id = "raceView">
 	<a-cylinder position = "-23 1.5 -28" color = "gray" height = "3" radius = "0.3" ></a-cylinder>
 	<a-box  position = "-23 4 -28" depth = "0.6" width = "4" height = "3" color = "green" >
 	<a-link position = "0 0 0.2" rotation = "0 0 0" href = "race.html" ></a-link>
