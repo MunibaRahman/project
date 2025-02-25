@@ -61,9 +61,9 @@ window.onload = function(){
     let cols2 = row2.split("");
     for(let z = 0; z < cols2.length; z++){
       if(cols2[z] == "x"){
-        new Fence(x,0.25,z,90);
+        new Fence(x,0.25,z+35,90);
       }else if(cols2[z] == "X"){
-        new Fence(x,0.25,z+1,0);
+        new Fence(x,0.25,z+36,0);
       }}}
 
 new Grass(-10, 0);
