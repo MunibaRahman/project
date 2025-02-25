@@ -147,7 +147,7 @@ class Balloon{
       console.log("clicking on the checkpoint inside the balloon class")
       this.down = true;
     })
-	this.checkpoint2 = new CheckPoint(balloon1, 25, 0, -30);// here you have to change the this.x,this.y,this.z to be the values where you want the next checkpoint to be
+	this.checkpoint2 = new CheckPoint(balloon1, -400, 0, -30);
     this.checkpoint2.obj.addEventListener("click", ()=>{
       this.down = true;
     })
