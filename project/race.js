@@ -5,7 +5,7 @@ let map = [
  ];
  var time = 10;
  
- let scene, fence,mainCam, win, lose;
+ let scene, fence,mainCam, win, lose, horse, trophy1;
  let speed = 0.05;
  window.onload = function(){
    fence = document.getElementById("fenceUnit");
@@ -13,7 +13,9 @@ let map = [
    lose = document.getElementById("lose");
    scene = document.querySelector("a-scene");
    mainCam = document.getElementById("mainCam");
+   horse = document.getElementById("horseModel");
    let timeText = document.getElementById("timeText");
+   trophy1 = new Trophy(0,3,-100);
  let countdownInterval = setInterval(() => {
          if (time >= 0) {
              timeText.setAttribute('text', 'value', `${time} seconds`);
@@ -24,13 +26,14 @@ let map = [
          }
      }, 1000);
    
-   
-  
-  setInterval(() => {
+   let cameraMove = setInterval(() => {
+     
      let currentPos = mainCam.getAttribute('position');
        // Update the camera's position (move it along the z-axis)
-     mainCam.setAttribute('position', { x: currentPos.x, y: currentPos.y, z: currentPos.z - 0.5 });
-     }, 25); // Move every 50ms
+     mainCam.setAttribute('position', { x: currentPos.x, y: currentPos.y, z: currentPos.z -0.5 });
+   }, 25); // Move every 50ms
+  
+  
    
    for(let x = 0; x < map.length; x++){
      let row = map[x];
@@ -47,7 +50,7 @@ let map = [
        }
      
      }}
-     new Coin(0,5,-100);
+     
     new Hurdle(-5,0.75,70);
     new Hurdle(1,2,65);
     new Hurdle(5,0.75,50);
@@ -66,8 +69,13 @@ let map = [
    loop();
  }
  function loop(){
+    if (distance(trophy1.obj, mainCam) < 2.6){
+      console.log("close");
+      trophy1.obj.setAttribute("opacity", 0);
+      window.open("home.html", "_self");
+      
+    }
    
- 
     window.requestAnimationFrame(loop);
  
  }
@@ -130,38 +138,39 @@ let map = [
    this.obj.setAttribute("position",{x:x,y:y,z:z});
      scene.append(this.obj);  
    }}
- class Coin{
+ class Trophy{
    constructor(x,y,z){
      this.y = y;
-     this.dy = 0.01;
-     this.a = 0;
-     this.da = 0.01;
+     this.x = x;
+   this.z = z;
  
-     this.obj = document.createElement("a-cylinder");
-     this.obj.setAttribute("interact","");
-     this.obj.setAttribute("color","yellow");
-     this.obj.setAttribute("opacity",0.75);
-     this.obj.setAttribute("rotation","90 0 0");
-     this.obj.setAttribute("scale","0.25 0.1 0.25");
-     this.obj.setAttribute("position",{x:x,y:this.y,z:z});
-   //this.obj.setAttribute("sound", {src: "#coinSound", loop:false})
- 
-      this.obj.addEventListener("click", ()=>{
-      this.sound = true;
-      this.collect();
-     
-   })
-   
+     this.obj = document.createElement("a-gltf-model");
+     this.obj.setAttribute("src","#trophy");
+     this.obj.setAttribute("scale","2 2 2");
+     this.obj.setAttribute("position",{x:x,y:y,z:z});
      scene.append(this.obj); 
+   
+   
    }
  
-   collect(){
-     //if(this.sound){
-     //  this.obj.components.sound.playSound();
-     //}
-     this.obj.setAttribute("opacity",0);
-   win.setAttribute("opacity",1);
-   
-   
+    collect() {
+   if (distance(this.obj, mainCam) < 1){
+     this.obj.setAttribute("opacity", 0);
+     win.setAttribute("opacity", 1);
+     }
+     
    }
+ 
+ }
+ 
+ function distance(obj1,obj2){
+   let x1 = obj1.object3D.position.x;
+   let y1 = obj1.object3D.position.y;
+   let z1 = obj1.object3D.position.z;
+   let x2 = obj2.object3D.position.x;
+   let y2 = obj2.object3D.position.y;
+   let z2 = obj2.object3D.position.z;
+ 
+   let d = Math.sqrt(Math.pow(x1-x2,2) + Math.pow(y1-y2,2) + Math.pow(z1-z2,2));
+   return d;
  }
