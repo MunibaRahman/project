@@ -142,7 +142,7 @@ class Balloon{
     this.z = z;
     this.ride = false;
     this.down = false; 
-    this.checkpoint = new CheckPoint(balloon1, this.x, this.y, this.z +10);
+    this.checkpoint = new CheckPoint(balloon1, this.x, this.y, this.z);
     this.checkpoint.obj.addEventListener("click", ()=>{
       console.log("clicking on the checkpoint inside the balloon class")
       this.down = true;
