@@ -142,24 +142,19 @@ let map = [
    constructor(x,y,z){
      this.y = y;
      this.x = x;
-   this.z = z;
+    this.z = z;
  
      this.obj = document.createElement("a-gltf-model");
      this.obj.setAttribute("src","#trophy");
      this.obj.setAttribute("scale","2 2 2");
      this.obj.setAttribute("position",{x:x,y:y,z:z});
+     console.log("created trophy");
      scene.append(this.obj); 
    
    
    }
  
-    collect() {
-   if (distance(this.obj, mainCam) < 1){
-     this.obj.setAttribute("opacity", 0);
-     win.setAttribute("opacity", 1);
-     }
-     
-   }
+  
  
  }
  
