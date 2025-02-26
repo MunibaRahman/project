@@ -101,7 +101,7 @@ function loop(){
 
    window.requestAnimationFrame(loop);
 
-}
+}}
 
 class Fence{
   constructor(x,y,z,r){
@@ -220,7 +220,7 @@ class Fence{
         }
       }//close if down
     } 
-  }//end balloon class
+  } //end balloon class
 
    
 function distance(obj1,obj2){
