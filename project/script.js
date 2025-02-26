@@ -39,7 +39,7 @@ window.onload = function(){
   camera = document.getElementById("mainCamera");
   tractorCamera = document.getElementById("tractorCamera");
   tractorOrig = document.getElementById("tractor");
-  tractor1 = new Tractor(10,0.4,0);
+  tractor1 = new Tractor(10,4,0);
   fence = document.getElementById("fenceUnit");
 	balloon1 = new Balloon(4.5,0,45);
  
