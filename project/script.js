@@ -32,7 +32,7 @@ let maze = [
  "xxxxxxxxxxxxxxxxxxxx",
 ];
 
-let scene, corn, camera, tracCam, grass, coin,tracRide,tractorOrig, grass = [];
+let scene, corn, camera, tracCam, coin,tracRide,tractorOrig, grass = [];
 let fence,mainCam, balloonCam, mainCursor, balloon1, check;;
 window.onload = function(){
   scene = document.querySelector("a-scene");
