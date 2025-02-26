@@ -90,7 +90,7 @@ if(e.key == " "){
 }
   
 function loop(){
-  for(let grass of Grass){
+  for(let grass of grass){
 
   if(distance(camera, grass.obj) < 2){
    grass.dissapear();
@@ -101,7 +101,7 @@ function loop(){
 
    window.requestAnimationFrame(loop);
 
-}}
+  }}
 
 class Fence{
   constructor(x,y,z,r){
