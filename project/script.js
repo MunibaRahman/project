@@ -32,7 +32,7 @@ let maze = [
  "xxxxxxxxxxxxxxxxxxxx",
 ];
 
-let scene, corn, camera, tracCam, grass, coin,tracRide,tractorOrig;
+let scene, corn, camera, tracCam, grass, coin,tracRide,tractorOrig, grass = [];
 let fence,mainCam, balloonCam, mainCursor, balloon1, check;;
 window.onload = function(){
   scene = document.querySelector("a-scene");
@@ -66,7 +66,12 @@ window.onload = function(){
         new Fence(x,0.25,z+36,0);
       }}}
 
-new Grass(-10, 0);
+  for(let z = 100; z > -200; z -= 15){
+    let x = rnd(-50,50);
+    let pz = z + rnd(-5, 5);
+    grass.push(new Grass(x,-pz));
+  }
+	
 new Coin(-9.5, 1, -9);
 
   window.addEventListener("keypress",function(e){
@@ -85,8 +90,12 @@ if(e.key == " "){
 }
   
 function loop(){
- //tractor1.tractorRide();
-  //balloon1.balloonEnd();
+  for(let grass of Grass){
+
+  if(distance(camera, grass.obj) < 2){
+   grass.dissapear();
+
+  }
    balloon1.balloonRide();
   balloon1.balloonEnd();
 
