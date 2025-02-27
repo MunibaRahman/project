@@ -1,0 +1,104 @@
+<html>
+
+<head>
+<!-- dynamic body:  -->
+
+  <title>Multiplayer AFrame</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.1.0/dist/aframe-extras.min.js"></script>
+   
+  <script src="race.js"></script>
+  <script src="kinema.js"></script>
+	<style>
+#back{
+ position: absolute;
+  top: 10;
+  left: 20;
+  z-index: 1;
+  appearance: none;
+  background-color: #2ea44f;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+	</style>
+</head>
+
+<body>
+<button id = "back"><a style = "color:white;" href = "index.html"> Back To Farm</a></button>
+<button id = "back">Use your left and right arrows to steer!</button>
+  <a-scene>
+		<a-assets>
+		<img id="win" src="winImg.png">
+		<img id="lose" src="loseImg.png">
+		<!-- <a-asset-item src = "farmer_rat_joe/scene.gltf" id = "rat" ></a-asset-item> -->
+		<a-asset-item src = "horse/scene.gltf" id = "horse" ></a-asset-item>
+    <a-asset-item src = "trophy/scene.gltf" id = "trophy" ></a-asset-item>
+	
+		</a-assets>
+  <!-- setup and planes  -->
+    <a-plane static-body color="green" position="0 0 -5" rotation="-90 0 0" width="50" height="200"></a-plane>
+	<a-plane static-body color = "#a95517" position="0 0.2 -5" rotation="-90 0 0" width="30" height="200" ></a-plane>
+	<a-plane static-body position="0 0.4 -5" rotation="-90 0 0" width="2" height="200" ></a-plane>
+    <a-sky color="#96d3ff"></a-sky>
+	 <a-entity id="rig"  movement-controls kinematic-body>
+    <a-camera look-controls="enabled: false"  active id = "mainCam" position="0 5 95">
+	<a-animation
+      attribute="position"
+      to="0 2 0"
+      dur="5000"
+      repeat="indefinite"
+      easing="linear"
+    ></a-animation>
+		<a-cursor id = "mainCursor" raycaster="objects: [interact]">
+		<a-text id="timeText" value="" position = "1.3 0.75 0" color="red" width = "2" ></a-text>
+		<a-gltf-model scale = "0.3 0.3 0.3" rotation = "0 180 0" position = "0 -17 0" src = "#horse" ></a-gltf-model>
+		<a-image id = "win" src = "#win" opacity = "0"></a-image>
+		<a-image id = "lose" src = "#lose" opacity = "0"></a-image>
+		
+		</a-cursor>	
+    </a-camera></a-entity>
+	
+
+	<!-- main items -->
+	<a-entity position = "1000 0 -3" id = "fenceUnit">
+      <a-box position = "0 0 0" color = "#542224" depth = "0.2" width = "0.2" height = "4"> </a-box> 
+      <a-box position = "1 0 0" color = "#542224" depth = "0.2" width = "0.2" height = "4"> </a-box> 
+      <a-box position = "0.5 0.5 0" color = "#542224" depth = "0.2" width = "0.2" height = "1.75" rotation = "0 0 90"> </a-box> 
+    </a-entity>
+	<a-entity rotation = "0 90 0" position = "4 0.1 45" id = "standsLeft">
+	<a-box position="0 1.75 -28" color = "grey" width = "100" height = "3.5"></a-box>
+	<a-box position="0 1 -27" color = "grey" width = "100" height = "2"></a-box>
+	<a-box position="0 0.5 -26" color = "grey" width = "100" height = "1"></a-box>
+	<a-entity>
+	<a-entity rotation = "0 180 0" position = "0 0.1 -8" id = "standsRight">
+	<a-box position="0 1.75 -28" color = "grey" width = "100" height = "3.5"></a-box>
+	<a-box position="0 1 -27" color = "grey" width = "100" height = "2"></a-box>
+	<a-box position="0 0.5 -26" color = "grey" width = "100" height = "1"></a-box>
+	<a-entity>
+	
+	<!-- <a-gltf-model position = "0 0.5 200" src = "#rat"></a-gltf-model> -->
+    </a-scene>
+</body>
+
+</html>

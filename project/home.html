@@ -1,0 +1,125 @@
+<html>
+  <head>
+     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.1.0/dist/aframe-extras.min.js"></script>
+	 <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+     <script src="script.js"></script>
+<script src="corn.js"></script>
+<script src="kinema.js"></script>
+<script src = "grass.js"></script>
+<script src = "coin.js"></script>
+<script src = "tractor.js"></script>
+<!-- <script src = "style.css"></script> -->
+  </head>
+  <body>
+    <a-scene>
+
+
+		<a-assets>
+			<audio id="coinSound" src="coin.mp3" preload="auto"></audio>
+			<a-asset-item id="farm" src="low_poly_farm/scene.gltf" ></a-asset-item>
+			<a-asset-item id="corn" src="corn_corn_corn/scene.gltf" ></a-asset-item>
+			<a-asset-item id="grass" src="grass/scene.gltf" ></a-asset-item>
+			<img id="hay" src="hay1.jpg">
+			<img id="raceimg" src="raceimg.png">
+			<img id="checkimg" src="checkimg.png">
+			<a-asset-item src = "hotModel/scene.gltf" id = "balloonModel" ></a-asset-item>
+			<a-asset-item src = "chickenModel/scene.gltf" id = "chickenModel" ></a-asset-item>
+			<a-asset-item src = "eggModel/scene.gltf" id = "eggModel" ></a-asset-item>
+			<a-asset-item src = "chicken_coop/scene.gltf" id = "chick_coop" ></a-asset-item>
+			<audio src = "cluck.mp3" id ="cluck" preload = "auto"></audio>
+			<audio src = "crack1.mp3" id ="crack" preload = "auto"></audio>
+			<audio src = "bgSong.mp3" id ="background" preload = "auto"></audio>
+			
+		  </a-assets>
+ 
+ <a-gltf-model src = "#farm" position = "-100 -14 0" scale = " 0.5 0.5 0.5" ></a-gltf-model>
+  
+ 
+ 
+ <a-entity id = "tractor" scale = "0.5 0.5 0.5" position = "5 -100 0">
+   
+
+<a-box  position="0 2 5"  color="red" width="5.9" depth="3" height="6"></a-box>
+<a-box position="-4 1 5"  color="red" width="5" depth="3" height="3.2">
+
+</a-box>
+<a-cylinder rotation="90" color="black" position="-5.5 0 6.5"></a-cylinder>
+<a-cylinder rotation="90" color="black" position="-5.5 0 3.5"></a-cylinder>
+<a-cylinder rotation="90" color="grey" position="-5.5 0 3.4"></a-cylinder>
+<a-cylinder rotation="90" color="grey" position="-5.5 0 6.4"></a-cylinder>
+<a-cylinder rotation="90" color="black" scale="2 2 2" position="2 0 6.4"></a-cylinder>
+<a-cylinder rotation="90" color="black" scale="2 2 2" position="2 0 3"></a-cylinder>
+<a-cylinder rotation="90" color="grey" scale="2 2 2" position="2 0 2.9"></a-cylinder>
+<a-cylinder rotation="90" color="grey" scale="2 2 2" position="2 0 6.3"></a-cylinder>
+ </a-entity>
+
+      <a-plane static-body src = "grass.png" repeat = "10 10" position="0 0 -4" rotation="-90 0 0" width="500" height="200" ></a-plane>
+       <a-sky src = "sky.jpg" ></a-sky>
+ 
+<a-entity id="cameraRig"  position="0 1.6 0">
+<a-camera sound = "src:#background; loop: true;volume: 0.5" id="mainCamera" position = "0 4 -2" kinema-body="radius: 0.8">
+<a-cursor id = "mainCursor"><a-text id = "coopText" position = "1.3 0.75 0" width = "2" ></a-text></a-cursor>
+
+</a-camera>
+    </a-entity>
+	
+	  <a-entity position = "1000 0 -3" id = "fenceUnit">
+      <a-box position = "0 0 0" color = "#542224" depth = "0.2" width = "0.2" height = "2"> </a-box> 
+      <a-box position = "1 0 0" color = "#542224" depth = "0.2" width = "0.2" height = "2"> </a-box> 
+      <a-box position = "0.5 0.5 0" color = "#542224" depth = "0.2" width = "0.2" height = "1.75" rotation = "0 0 90"> </a-box> 
+    </a-entity>
+
+	<!-- race index view https://sketchfab.com/3d-models/farmer-rat-joe-58b3678900794e2ba16909aa10c317ac https://sketchfab.com/3d-models/farmer-frog-c9852e66b01e4a9982a335fa01b82e53 https://sketchfab.com/3d-models/farmer-e2c0ea020abd4d7f9779de5fe9002ecd  https://sketchfab.com/3d-models/farmer-dog-d7bfa8ca8bdd4df08562099ea605d1f2-->
+	<a-entity rotation = "0 180 0" position = "-100 0 65" id = "raceView">
+	<a-cylinder position = "-23 1.5 -28" color = "gray" height = "3" radius = "0.3" ></a-cylinder>
+	<a-box  position = "-23 4 -28" depth = "0.6" width = "4" height = "3" color = "green" >
+	<a-link position = "0 0 0.2" rotation = "0 0 0" href = "race.html" ></a-link>
+	</a-box>
+	<a-image src = "#raceimg" position = "-23 4 -27.6" width = "4" height = "3" ></a-image>
+	<a-plane position="0 0.05 -20" rotation="-90 0 0" color = "brown" height = "10"  width = "50" ></a-plane>
+	<a-plane position="0 0.07 -20" rotation="-90 0 0" color = "white" height = "0.5"  width = "50" ></a-plane>
+	<a-box position="0 1.75 -28" color = "grey" width = "40" height = "3.5"></a-box>
+	<a-box position="0 1 -27" color = "grey" width = "40" height = "2"></a-box>
+	<a-box position="0 0.5 -26" color = "grey" width = "40" height = "1"></a-box>
+	
+	<a-entity  position = "-7 0.05 -18" id = "lowHurdle">
+		<a-cylinder position = "-3 1 -1" color = "white" rotation = "90 0 0" radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1 0" color = "red" rotation = "90 0 0" radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1 1" color = "white" rotation = "90 0 0" radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1.5 -1.5" color = "brown" height = "3"  radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1.5 1.5" color = "brown"   height = "3"  radius = "0.1" > </a-cylinder>
+	</a-entity>
+	<a-entity  position = "-15 0.05 -22" id = "lowHurdle">
+		<a-cylinder position = "-3 1 -1" color = "white" rotation = "90 0 0" radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1 0" color = "red" rotation = "90 0 0" radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1 1" color = "white" rotation = "90 0 0" radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1.5 -1.5" color = "brown" height = "3"  radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1.5 1.5" color = "brown"   height = "3"  radius = "0.1" > </a-cylinder>
+	</a-entity>
+	<a-entity  position = "0 0.05 -22" id = "highHurdle">
+		<a-cylinder position = "-3 1.75 -1" color = "white" rotation = "90 0 0" radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1.75 0" color = "red" rotation = "90 0 0" radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1.75 1" color = "white" rotation = "90 0 0" radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1.5 -1.5" color = "brown" height = "3"  radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1.5 1.5" color = "brown"   height = "3"  radius = "0.1" > </a-cylinder>
+	</a-entity>
+	<a-entity  position = "10 0.05 -22" id = "highHurdle">
+		<a-cylinder position = "-3 1.75 -1" color = "white" rotation = "90 0 0" radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1.75 0" color = "red" rotation = "90 0 0" radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1.75 1" color = "white" rotation = "90 0 0" radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1.5 -1.5" color = "brown" height = "3"  radius = "0.1" > </a-cylinder>
+		<a-cylinder position = "-3 1.5 1.5" color = "brown"   height = "3"  radius = "0.1" > </a-cylinder>
+	</a-entity>
+	
+	<a-entity><!-- end race index view -->  
+		<a-entity rotation = "0 90 0" id = "coop" position = "13 0 87">
+		<a-gltf-model static-body position = "4 0 8" rotation = "0 200 0" scale = "0.01 0.01 0.01" src = "#chick_coop"></a-gltf-model>
+		<a-box static-body rotation = "0 45 0" src = "#hay" repeat = "5 5" position = "-1 0 10" width = "4" height = "3" ></a-box>
+		<a-box static-body src = "#hay" repeat = "5 5" position = "3 0 10" width = "4" height = "3" ></a-box>
+		</a-entity>
+   </a-scene>
+
+  </body>
+</html>
