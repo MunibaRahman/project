@@ -110,7 +110,7 @@ if(e.key == " "){
 function loop(){
   for(let grass of grassArray){
 
-  if(distance(camera, grass.obj) < 2){
+  if(distance(tractor1, grass.obj) < 2){
    grass.disappear();
 
   }}
