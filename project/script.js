@@ -1,4 +1,3 @@
-let rnd = (l,u) => Math.random() * (u-l) + l
 let maze = [
   "-xxxxxxxxxxxxxxxxxxxxx",
   "-x-------------------x",
@@ -33,8 +32,14 @@ let maze = [
 ];
 
 let scene, corn, camera, tracCam, coin,tracRide,tractorOrig, grassArray = [];
-let fence,mainCam, balloonCam, mainCursor, balloon1, check;;
+let fence,mainCam, balloonCam, mainCursor, balloon1, check;
+let eggCount=0; let chickens = [], coopText; 
+let eggGame = false;
+let rnd = (l,u) => Math.floor(Math.random()*(u-l)+l);
+let eggs = [], coop;
 window.onload = function(){
+  coop = document.getElementById("coop");
+	coopText = document.getElementById("coopText");
   scene = document.querySelector("a-scene");
   camera = document.getElementById("mainCamera");
   tractorCamera = document.getElementById("tractorCamera");
@@ -85,7 +90,20 @@ if(e.key == " "){
 
     
   })
+  for(let i = 0; i < 10; i++){
 
+		x = rnd(-10,10);
+		z = rnd(-10,10);
+		eggs.push(new Egg(x,z));
+    
+	}
+	for(let i = 0; i < 3; i++){
+
+		x = rnd(-10,10);
+		z = rnd(-10,10);
+		chickens.push(new Chicken(x,z));
+    
+	}
   loop();
 }
   
@@ -96,6 +114,11 @@ function loop(){
    grass.dissapear();
 
   }}
+  for(let egg of eggs){
+    egg.roll();
+  }
+
+
    balloon1.balloonRide();
   balloon1.balloonEnd();
 
@@ -222,6 +245,88 @@ class Fence{
     } 
   } //end balloon class
 
+  class Egg{
+    constructor(x,z){
+      this.x = x;
+      this.dx = rnd(-8,8) / 100 ;
+      this.z = z;
+      this.dz = rnd(-8,8) / 100;
+    this.move = true;
+      this.obj = document.createElement("a-gltf-model");
+    this.obj.setAttribute("src", "#eggModel");
+      this.obj.setAttribute("sound", "src:#crack");
+    this.obj.setAttribute("rotation", "0 0 90");
+    this.obj.setAttribute("scale", "0.5 0.5 0.5");
+     this.obj.setAttribute("color","red");
+      this.obj.setAttribute("clickable","");
+  
+    this.obj.addEventListener("click",()=>{
+      this.move = false;
+      eggCount++;
+      eggGame = true;
+      console.log(eggCount);
+      this.obj.components.sound.playSound();
+       setTimeout(() => {
+          this.obj.remove();
+        }, 250); 
+    });
+      this.obj.setAttribute("position",{x:this.x, y:0.25, z:this.z});
+      coop.append(this.obj);
+    }
+    roll(){
+    if (this.move){
+      this.z += this.dz;
+      if (this.z < -10 || this.z >10){
+        this.dz = -this.dz;
+    }
+    
+      this.x += this.dx;
+      if (this.x < -10 || this.x >10){
+        this.dx = -this.dx;
+      }
+   
+        this.obj.setAttribute("position",{x:this.x, y:0.25, z:this.z}); 
+      
+    }
+    }
+  }
+  class Chicken{
+    constructor(x,z){
+      this.x = x;
+      this.dx = rnd(-8,8) / 100 ;
+      this.z = z;
+      this.dz = rnd(-8,8) / 100;
+    this.move = true;
+      this.obj = document.createElement("a-gltf-model");
+    this.obj.setAttribute("src", "#chickenModel");
+    this.obj.setAttribute("rotation", "0 180 0");
+    this.obj.setAttribute("animation-mixer", "");
+    this.obj.setAttribute("scale", "0.005 0.005 0.005");
+  
+      this.obj.setAttribute("position",{x:this.x, y:-0.03, z:this.z});
+      coop.append(this.obj);
+    }
+    run(){
+    if (this.move){
+      this.z += this.dz;
+      if (this.z < -10 || this.z >10){
+        this.dz = -this.dz;
+    }
+    
+      this.x += this.dx;
+      if (this.x < -10 || this.x >10){
+        this.dx = -this.dx;
+      }
+   
+        this.obj.setAttribute("position",{x:this.x, y:0.25, z:this.z}); 
+      
+    }
+    }
+    peck(){
+      
+    }
+    
+  }
    
 function distance(obj1,obj2){
   let x1 = obj1.object3D.position.x;

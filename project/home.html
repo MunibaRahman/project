@@ -2,7 +2,8 @@
   <head>
      <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
      <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.1.0/dist/aframe-extras.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+	 <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
      <script src="script.js"></script>
 <script src="corn.js"></script>
 <script src="kinema.js"></script>
@@ -15,16 +16,17 @@
     <a-scene>
 
 
-      <a-assets>
- <audio id="coinSound" src="coin.mp3" preload="auto"></audio>
-<a-asset-item id="farm" src="low_poly_farm/scene.gltf" ></a-asset-item>
-<a-asset-item id="corn" src="corn_corn_corn/scene.gltf" ></a-asset-item>
-<a-asset-item id="grass" src="grass/scene.gltf" ></a-asset-item>
-<img id="raceimg" src="raceimg.png">
-<img id="checkimg" src="checkimg.png">
-<a-asset-item src = "hotModel/scene.gltf" id = "balloonModel" ></a-asset-item>
-
-      </a-assets>
+		<a-assets>
+			<img id="raceimg" src="raceimg.png">
+			<img id="checkimg" src="checkimg.png">
+			<a-asset-item src = "hotModel/scene.gltf" id = "balloonModel" ></a-asset-item>
+			<a-asset-item src = "chickenModel/scene.gltf" id = "chickenModel" ></a-asset-item>
+			<a-asset-item src = "eggModel/scene.gltf" id = "eggModel" ></a-asset-item>
+			<audio src = "cluck.mp3" id ="cluck" preload = "auto"></audio>
+			<audio src = "crack1.mp3" id ="crack" preload = "auto"></audio>
+			<audio src = "bgSong.mp3" id ="background" preload = "auto"></audio>
+			
+		  </a-assets>
  
  <a-gltf-model src = "#farm" position = "-100 -14 0" scale = " 0.5 0.5 0.5" ></a-gltf-model>
   
@@ -51,7 +53,7 @@
        <a-sky src = "sky.jpg" ></a-sky>
  
 <a-entity id="cameraRig"  position="0 1.6 0">
-<a-camera id="mainCamera" position = "0 4 -2" kinema-body="radius: 0.8">
+<a-camera sound = "src:#background; loop: true;volume: 0.5" id="mainCamera" position = "0 4 -2" kinema-body="radius: 0.8">
 <a-cursor id = "mainCursor"></a-cursor>
 </a-camera>
     </a-entity>
@@ -105,7 +107,9 @@
 	</a-entity>
 	
 	<a-entity><!-- end race index view -->  
-
+		<a-entity id = "coop" position = "-10 0 0">
+		
+		</a-entity>
    </a-scene>
 
   </body>
