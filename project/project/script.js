@@ -49,7 +49,7 @@ window.onload = function(){
 	balloon1 = new Balloon(4.5,0,45);
  
 	mainCursor = document.getElementById("mainCursor");
-
+ camera.components.sound.playSound();
   for(let r = 0; r < maze.length; r++){
     let row = maze[r];
     let cols = row.split("");
