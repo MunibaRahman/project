@@ -111,13 +111,13 @@ function loop(){
   for(let grass of grassArray){
 
   if(distance(camera, grass.obj) < 2){
-   grass.dissapear();
+   grass.disappear();
 
   }}
   for(let egg of eggs){
     egg.roll();
   }
-  
+
 
    balloon1.balloonRide();
   balloon1.balloonEnd();
