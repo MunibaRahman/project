@@ -111,7 +111,7 @@ function loop(){
   for(let grass of grassArray){
 
   if(distance(camera, grass.obj) < 2){
-   grass.disapear();
+   grass.disappear();
 
   }}
   for(let egg of eggs){
