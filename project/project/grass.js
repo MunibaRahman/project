@@ -64,6 +64,7 @@ class Grass{
 		
 		this.obj.append(grass);
 	 }
+	 
 	 	 for(let i = 0; i < 10; i++){
 		let r = rnd(0.8,1.8);
 		grass = document.createElement("a-gltf-model");
