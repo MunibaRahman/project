@@ -32,14 +32,14 @@ let maze = [
 ];
 
 let scene, corn, camera, tracCam, coin,tracRide,tractorOrig, grassArray = [];
-let fence,mainCam, balloonCam, mainCursor, balloon1, check;
+let fence, balloonCam, mainCursor, balloon1, check;
 let eggCount=0; let chickens = [], coopText; 
 let eggGame = false;
 let rnd = (l,u) => Math.floor(Math.random()*(u-l)+l);
 let eggs = [], coop;
 window.onload = function(){
   coop = document.getElementById("coop");
-	coopText = document.getElementById("coopText");
+coopText = document.getElementById("coopText");
   scene = document.querySelector("a-scene");
   camera = document.getElementById("mainCamera");
   tractorCamera = document.getElementById("tractorCamera");
@@ -49,7 +49,7 @@ window.onload = function(){
 	balloon1 = new Balloon(4.5,0,45);
  
 	mainCursor = document.getElementById("mainCursor");
-
+camera.components.sound.playSound();
   for(let r = 0; r < maze.length; r++){
     let row = maze[r];
     let cols = row.split("");
@@ -78,7 +78,11 @@ window.onload = function(){
   }
 	
 new Coin(-9.5, 1, -9);
-
+window.addEventListener("keypress",function(e){
+if(e.key == "k"){
+    eggGame = false;
+	}
+  })
   window.addEventListener("keypress",function(e){
 if(e.key == " "){
     camera.setAttribute("active",true);
@@ -87,20 +91,18 @@ if(e.key == " "){
     camera.object3D.position.z = tractor1.camera.object3D.position.z;
     tractor1.camera.setAttribute("active",false);
 	}
-
-    
   })
   for(let i = 0; i < 10; i++){
 
-		x = rnd(-10,10);
-		z = rnd(-10,10);
+		x = rnd(-5,5);
+		z = rnd(-5,5);
 		eggs.push(new Egg(x,z));
     
 	}
 	for(let i = 0; i < 3; i++){
 
-		x = rnd(-10,10);
-		z = rnd(-10,10);
+		x = rnd(-5,5);
+		z = rnd(-5,5);
 		chickens.push(new Chicken(x,z));
     
 	}
@@ -108,16 +110,44 @@ if(e.key == " "){
 }
   
 function loop(){
+	//console.log(camera.object3D.position); 
   for(let grass of grassArray){
 
   if(distance(tractor1.obj, grass.obj) < 2){
    grass.disappear();
 
   }}
-  for(let egg of eggs){
+  
+if (eggGame){
+	for(let egg of eggs){
     egg.roll();
   }
+	camera.components.sound.pauseSound();
+	 for (let chick of chickens) {
+		const chickenWorldPos = new THREE.Vector3();
+      chick.obj.object3D.getWorldPosition(chickenWorldPos);
+      const cameraWorldPos = new THREE.Vector3();
+      camera.object3D.getWorldPosition(cameraWorldPos); 
 
+      const dist = chickenWorldPos.distanceTo(cameraWorldPos);
+	  if (dist < 1.5) { 
+        chick.obj.components.sound.playSound();
+        eggCount--;
+      }
+		coopText.setAttribute("value", "Eggs: " + eggCount);
+		chick.run();
+      if (eggCount > 9) { 
+       eggGame = false;
+      }
+    }
+	  
+	  
+  }else{
+	  coopText.setAttribute("value", "");
+	  camera.components.sound.playSound();
+	  for(let chick of chickens){
+    //chick.run();
+  } }
 
 
    balloon1.balloonRide();
@@ -271,18 +301,18 @@ class Fence{
           this.obj.remove();
         }, 250); 
     });
-      this.obj.setAttribute("position",{x:this.x, y:0.25, z:this.z});
+      this.obj.setAttribute("position",{x:this.x, y:0, z:this.z});
       coop.append(this.obj);
     }
     roll(){
     if (this.move){
       this.z += this.dz;
-      if (this.z < -10 || this.z >10){
+      if (this.z < -5 || this.z >5){
         this.dz = -this.dz;
     }
     
       this.x += this.dx;
-      if (this.x < -10 || this.x >10){
+      if (this.x < -5 || this.x >5){
         this.dx = -this.dx;
       }
    
@@ -300,7 +330,8 @@ class Fence{
     this.move = true;
       this.obj = document.createElement("a-gltf-model");
     this.obj.setAttribute("src", "#chickenModel");
-    this.obj.setAttribute("rotation", "0 180 0");
+	this.obj.setAttribute("sound", "src:#cluck");
+    this.obj.setAttribute("rotation", "0 0 0");
     this.obj.setAttribute("animation-mixer", "");
     this.obj.setAttribute("scale", "0.005 0.005 0.005");
   
@@ -310,15 +341,14 @@ class Fence{
     run(){
     if (this.move){
       this.z += this.dz;
-      if (this.z < -10 || this.z >10){
+      if (this.z < -5 || this.z >5){
         this.dz = -this.dz;
     }
     
       this.x += this.dx;
-      if (this.x < -10 || this.x >10){
+      if (this.x < -5 || this.x >5){
         this.dx = -this.dx;
       }
-   
         this.obj.setAttribute("position",{x:this.x, y:0.25, z:this.z}); 
       
     }
