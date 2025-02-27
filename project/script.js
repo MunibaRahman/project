@@ -117,7 +117,7 @@ function loop(){
   for(let egg of eggs){
     egg.roll();
   }
-
+  
 
    balloon1.balloonRide();
   balloon1.balloonEnd();
