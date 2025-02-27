@@ -12,7 +12,7 @@ class Grass{
 		scene.append(this.obj);
 	 }
 disappear(){
-  this.obj.setAttribute("opacity", 0);
+  this.obj.remove;
 }
 		
 	}
