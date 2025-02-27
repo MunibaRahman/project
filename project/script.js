@@ -110,7 +110,7 @@ if(e.key == " "){
 function loop(){
   for(let grass of grassArray){
 
-  if(distance(tractor1, grass.obj) < 2){
+  if(distance(tractor1.obj, grass.obj) < 2){
    grass.disappear();
 
   }}
@@ -118,7 +118,7 @@ function loop(){
     egg.roll();
   }
 
-  
+
 
    balloon1.balloonRide();
   balloon1.balloonEnd();
